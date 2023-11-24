@@ -5,7 +5,7 @@ import GameService from "../services/GameService.ts";
 import {Game} from "../models/Game.ts";
 import {useNavigate} from "react-router-dom";
 
-export const Home: FC = () => {
+const Home: FC = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [page, setPage] = useState(1)
@@ -83,3 +83,5 @@ export const Home: FC = () => {
         </Layout>
     );
 };
+
+export default Home;

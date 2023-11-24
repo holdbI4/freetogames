@@ -5,7 +5,9 @@ import GameService from "../services/GameService.ts";
 import {SingleGame as SinglegameResponse} from "../models/Game.ts";
 import {Col, Row, Image, Card, Descriptions, DescriptionsProps, Carousel} from "antd";
 
-export const SingleGame = () => {
+
+
+const SingleGame = () => {
     const params = useParams()
     const [game, setGame] = useState<SinglegameResponse>()
 
@@ -135,3 +137,5 @@ export const SingleGame = () => {
         </Layout>
     );
 };
+
+export default SingleGame;

@@ -1,7 +1,11 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Home} from "./pages/Home.tsx";
 import {ConfigProvider} from "antd";
-import {SingleGame} from "./pages/SingleGame.tsx";
+import {lazy} from "react";
+
+
+const Home = lazy(()=> import("./pages/Home.tsx"))
+const SingleGame = lazy(()=> import("./pages/SingleGame.tsx"))
+
 
 function App() {
 
