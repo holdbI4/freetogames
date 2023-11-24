@@ -28,3 +28,5 @@ export interface SingleGame extends Game {
     minimum_system_requirements: SystemRequirements;
     screenshots: Screenshot[]
 }
+
+export type gameSorts = "alphabetical" | "release-date" | "popularity" | "relevance"

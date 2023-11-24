@@ -3,9 +3,11 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import GameService from "../services/GameService.ts";
 import {SingleGame as SinglegameResponse} from "../models/Game.ts";
-import {Col, Row, Image, Card, Descriptions, DescriptionsProps, Carousel} from "antd";
+import {Col, Row, Image, Card, Descriptions, DescriptionsProps, Carousel, Breadcrumb} from "antd";
 
-export const SingleGame = () => {
+
+
+const SingleGame = () => {
     const params = useParams()
     const [game, setGame] = useState<SinglegameResponse>()
 
@@ -58,31 +60,31 @@ export const SingleGame = () => {
         {
             key: '1',
             label: 'OS',
-            children: <p>{game?.minimum_system_requirements.os}</p>,
+            children: <p>{game?.minimum_system_requirements?.os}</p>,
             span: 12,
         },
         {
             key: '2',
             label: 'Processor',
-            children: <p>{game?.minimum_system_requirements.processor}</p>,
+            children: <p>{game?.minimum_system_requirements?.processor}</p>,
             span: 12,
         },
         {
             key: '3',
             label: 'Memory',
-            children: <p>{game?.minimum_system_requirements.memory}</p>,
+            children: <p>{game?.minimum_system_requirements?.memory}</p>,
             span: 12,
         },
         {
             key: '4',
-            label: 'Grapgics',
-            children: <p>{game?.minimum_system_requirements.graphics}</p>,
+            label: 'Graphics',
+            children: <p>{game?.minimum_system_requirements?.graphics}</p>,
             span: 12,
         },
         {
             key: '5',
             label: 'Storage',
-            children: <p>{game?.minimum_system_requirements.storage}</p>,
+            children: <p>{game?.minimum_system_requirements?.storage}</p>,
             span: 12,
         },
 
@@ -96,7 +98,18 @@ export const SingleGame = () => {
     }, [params]);
     return (
         <Layout>
+            <Breadcrumb
+                className="mb-16"
+                items={[
+                    {
+                        title: <a href="/">Home</a>
+                    },
+                    {
+                        title:game?.title
+                    }
 
+                ]}
+            />
             <Row className="row-wrapper">
                 <Col span={24}>
                     <div style={{position: "relative", color: "white"}}>
@@ -110,16 +123,19 @@ export const SingleGame = () => {
                     </Card>
 
                 </Col>
+                {game?.minimum_system_requirements !== undefined ?(
                 <Col span={24} className="mt-16">
                     <Card>
                        <Descriptions items={otherItems}/>
                     </Card>
                 </Col>
+                ) : ""}
 
                 <Col span={24} className="mt-16">
                     <Carousel autoplay>
                         {game?.screenshots.map(img => {
                             return <Image
+                                key={img.id}
                                 src={img.image}
                                 alt={game?.title}
                                 className="slider-img"
@@ -135,3 +151,5 @@ export const SingleGame = () => {
         </Layout>
     );
 };
+
+export default SingleGame;

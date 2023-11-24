@@ -1,7 +1,11 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Home} from "./pages/Home.tsx";
 import {ConfigProvider} from "antd";
-import {SingleGame} from "./pages/SingleGame.tsx";
+import {lazy, Suspense} from "react";
+
+
+const Home = lazy(()=> import("./pages/Home.tsx"))
+const SingleGame = lazy(()=> import("./pages/SingleGame.tsx"))
+
 
 function App() {
 
@@ -18,8 +22,13 @@ function App() {
         >
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home />}></Route>
-                    <Route path="/game/:gameId" element={<SingleGame />}></Route>
+                    <Route path="/"
+                           element={
+                        <Suspense fallback={<h1>Loading</h1>}><Home/></Suspense>}
+                />
+                    <Route path="/game/:gameId" element={
+                        <Suspense fallback={<h1>Loading</h1>}><SingleGame/></Suspense>
+                    } />
                 </Routes>
             </BrowserRouter>
         </ConfigProvider>
